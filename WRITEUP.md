@@ -12,17 +12,17 @@ here; the words are yours.
 Give these to Claude before any analysis runs. One sentence each, plus one sentence on why you
 think so.
 
-**(1) A movie you know well, and what its three most-used tags will be:** XXXX
+**(1) A movie you know well, and what its three most-used tags will be:** Coco (2017) - I think music, family, emotional
 
-**(1) Why you think so:** XXXX
+**(1) Why you think so:** Music and family because the main story is Miguel's conflict between music and family. Emotional because of the idea that the dead fade away when nobody remembers.
 
-**(2) Out of every 100 people who rated movies here, how many ever added a tag?** XXXX
+**(2) Out of every 100 people who rated movies here, how many ever added a tag?** 10 out of 100
 
-**(2) Why you think so:** XXXX
+**(2) Why you think so:** Because tagging requires more effort than rating (choosing words instead of just choose a number on a scale 1-5)
 
-**(3) Can one person's tags take over a movie's tag list? Yes or no:** XXXX
+**(3) Can one person's tags take over a movie's tag list? Yes or no:** yes
 
-**(3) Why you think so:** XXXX
+**(3) Why you think so:** Because there are movies rated by very few people and one person can add many tags to a movie, so a person's tags can make up most of what appears.
 
 ## Part 1. Whose data is this?
 
