@@ -28,17 +28,17 @@ think so.
 
 Code: `part1_data.py`.
 
-**My rule for cutting 32 million ratings to 5 million** (written before reading `data/make_compact.py`)**:** XXXX
+**My rule for cutting 32 million ratings to 5 million** (written before reading `data/make_compact.py`)**:** Drawing ratings at random. It preserves the characteristics of the full data, thus, we could make statistics inference about the full data population using the subset.
 
-**One rule I considered and rejected, and why:** XXXX
+**One rule I considered and rejected, and why:** I also considered keeping users with the highest number of ratings. However, I rejected it because it would introduce selection bias and the resulting sample would contain only active users who are likely very different from low activity users.
 
-**One interesting thing from `data/README.md`:** XXXX
+**One interesting thing from `data/README.md`:** I found the number of tagging users interesting, most tagging users remain in the subset.
 
-**How the script's rule differs from mine, and what each keeps that the other drops:** XXXX
+**How the script's rule differs from mine, and what each keeps that the other drops:** The script's rule is not random, it first filters based on the number of ratings per movies, then filter users based on how many they have among those movies, then randomly samples only among the remaining eligible non-tagging users. My rule will keep movies with lower rating counts, low activity users and the overall characteristics of the data, while the script's rule focused on active users' ratings on popular movies.
 
-**First check. Which of Claude's numbers, the different route you took, and whether it matched** (one good target: 6 tags are the literal text `NA`, which pandas drops unless told not to)**:** XXXX
+**First check. Which of Claude's numbers, the different route you took, and whether it matched** (one good target: 6 tags are the literal text `NA`, which pandas drops unless told not to)**:** I checked distinct users who applied a tag using shell tools. The numbers matched, however, they calculate different things (users who rated something and also tagged vs every distinct userId in the tags file, whether or not they rated).
 
-**Second check. Which of Claude's numbers, the different route you took, and whether it matched:** XXXX
+**Second check. Which of Claude's numbers, the different route you took, and whether it matched:** I checked tag rows whose text is literally NA using shell tools and it matched.
 
 ## Part 2. What tags best describe a movie?
 
