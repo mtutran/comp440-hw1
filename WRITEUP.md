@@ -44,9 +44,9 @@ Code: `part1_data.py`.
 
 Code: `part2_tags.py`.
 
-**My movie, and why I picked it:** XXXX
+**My movie, and why I picked it:** I picked Coco because I like musical and family-related movies. I also feel like the movie is very heartwarming.
 
-**Its most misleading tag in the count-ordered list, and why it misleads:** XXXX
+**Its most misleading tag in the count-ordered list, and why it misleads:** I think none of the tags is really misleading, but the most misleading one is probably death since the story's overall theme is not about being died, it is a warm and colorful continuation of life.
 
 **What I learned about how MovieLens collects ratings and tags, from rating and tagging my movie myself (about 100 words):** XXXX
 
@@ -55,24 +55,24 @@ Code: `part2_tags.py`.
 One sentence on the figure written before you saw it and one after. The two tables are where the
 details below come from. Say which script made them.
 
-**The figure, when the tags and the ratings arrived. What I expected:** XXXX
-**The figure, what it shows:** XXXX
+**The figure, when the tags and the ratings arrived. What I expected:** I expect both to rise at the start, then fall.
+**The figure, what it shows:** The overall trends of both lines match my expectation, they both rise at first, then fall. The ratings line stays above the tag applications line most of the time. The tag line has a sudden spike at the beginning of 2021.
 
-**Two interesting details I learned up close that the counts did not show:** XXXX
+**Two interesting details I learned up close that the counts did not show:** 1. One person has multiple distinct tags for the movie (user 78213 made 234 tags on Coco, most of them are very detail, not many of them get in top 10). 2. There is not much variation in ratings among people with different tags.
 
-**Anything up close that contradicted something I had already written down. Which one, what the data showed, and what you now think. Or "nothing yet":** XXXX
+**Anything up close that contradicted something I had already written down. Which one, what the data showed, and what you now think. Or "nothing yet":** My prediction about Coco's tags in part 0 has 2 tags in top 10 and 1 did not get in top 10. My prediction about whether one person's tags can take over a movie's tag list in part 0 also does not match the results shown as the person with multiple tags does not have a lot of tags in the top 10. Now I think the answer to Can one person's tags take over a movie's tag list? in part 0 would be no.
 
 ### My definition
 
-**My `score(movie, tag)`** (one or two sentences, precise enough that a classmate could code it)**:** XXXX
+**My `score(movie, tag)`** (one or two sentences, precise enough that a classmate could code it)**:** A tag should score higher than another on the same movie if many users use that tag for the movie. The score should count each user once.
 
-**One definition I considered and rejected, and why:** XXXX
+**One definition I considered and rejected, and why:** One definition I considered is weighted by the user's rating of the movie since if they like the movie, they probably have tags that describe the movie better (less misleading tags). However, I rejected this since it will bias the results, people who like the movie may describe the movie very different from general audience or people who do not like the movie.
 
-**Which tags I merged as the same tag, which I kept apart, and why:** XXXX
+**Which tags I merged as the same tag, which I kept apart, and why:** I merged strings that differ only in case or in leading and trailing whitespace since they are the same concept, just different format. I kept everything else apart since they may reflect a slight difference in the user's intention. For example, music could describe an element of the movie, while musical refers to its genre. Similarly, someone might tag "day of the dead" as they do not know or do not associate the movie with mexican culture.
 
 **Why my definition, in about 150 words. Name one thing it gains and one thing it loses:**
 
-XXXX
+I chose to score a tag by the number of distinct users applied it since this avoids allowing one user to inflate a tag's score by applying it multiple times. However, it can not assess the quality of the tag, as most people might just apply tags that are already there instead of coming up with their own words.
 
 ### The judge
 
@@ -86,7 +86,7 @@ XXXX
 
 **My own order of the ten most-used tags, written before looking at any data: my movie from step 1, then my nine others from step 4:**
 
-XXXX
+177765: family, heartwarming, music, afterlife, colorful, Pixar, animation, Dia de los Muertos, mexico, death
 
 **One criterion I considered for the judge and rejected, and why** (the one I used is in `judge/criterion.md`)**:** XXXX
 
