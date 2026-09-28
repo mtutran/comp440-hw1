@@ -3,8 +3,7 @@
 Builds one self-contained HTML page comparing four rankings of the tags on each of your ten
 movies, and on the twenty least-rated movies the judge was asked about.  Per movie it shows
 the counts, your own order, the
-judge's order and your `score()` order, one after another; then the tags people applied to the
-movie; then the biggest disagreements between `score()` and the judge.  Open the page in a
+judge's order and your `score()` order, one after another; then the biggest disagreements between `score()` and the judge.  Open the page in a
 browser; --text prints the same content to a terminal.
 
 The `Your score()` column ranks only the tags the judge also rated, so that every column on the
@@ -147,11 +146,19 @@ def build(scores_path, judge_path, data_dir, writeup_path):
             "judge": sorted(judge_rank, key=lambda t: judge_rank[t])[:TOP],
             "score": sorted(score_rank, key=lambda t: score_rank[t])[:TOP],
             "gaps": gaps[:SHOWN],
+            "all_gaps": gaps,
             "apps": sorted(((row.tag, row.userId, as_date(row.timestamp))
                             for row in applied.itertuples()),
                            key=lambda app: (app[0], app[2])),
         })
     return out
+
+
+def all_disagreements(movies):
+    """Every movie's disagreements in one list, with the difference score() rank minus judge
+    rank, sorted by that difference from largest to smallest, then movie, then tag."""
+    rows = [(movie["title"], tag, s, j, s - j) for movie in movies for tag, s, j in movie["all_gaps"]]
+    return sorted(rows, key=lambda r: (-r[4], r[0], r[1]))
 
 
 def table_html(headers, rows):
@@ -170,7 +177,10 @@ def list_html(tags):
 def render(movies):
     """Build the page."""
     head = "<title>Results Viewer v0</title>\n<style>\n%s\n</style>" % CSS
-    body = ["<h1>Results Viewer</h1>", "<p>%s</p>" % html.escape(DEFINITION)]
+    body = ["<h1>Results Viewer</h1>", "<p>%s</p>" % html.escape(DEFINITION),
+            "<h2>All disagreements, every movie on this page</h2>",
+            table_html(["Movie", "Tag", "score() rank", "Judge rank", "score() rank - Judge rank"],
+                       all_disagreements(movies))]
     for movie in movies:
         body += [
             "<h2>%s</h2>" % html.escape(movie["title"]),
@@ -178,9 +188,6 @@ def render(movies):
             "<h3>Your order</h3>", list_html(movie["mine"]),
             "<h3>The judge's order</h3>", list_html(movie["judge"]),
             "<h3>Your score()</h3>", list_html(movie["score"]),
-            "<h3>Tags on this movie</h3>",
-            table_html(["Tag", "User", "Date"], movie["apps"]),
-            "<p>%d applications by %d people.</p>" % (len(movie["apps"]), movie["people"]),
             "<h3>Biggest disagreements, score() against the judge</h3>",
             table_html(["Tag", "score() rank", "Judge rank"], movie["gaps"]),
         ]
@@ -210,16 +217,16 @@ def numbered(tags):
 
 
 def render_text(movies):
-    out = ["Results Viewer", DEFINITION, ""]
+    out = ["Results Viewer", DEFINITION, "",
+           "All disagreements, every movie on this page",
+           table_text(["Movie", "Tag", "score() rank", "Judge rank", "score() rank - Judge rank"],
+                      all_disagreements(movies)), ""]
     for movie in movies:
         out += [movie["title"],
                 "  By count", numbered(movie["counts"]),
                 "  Your order", numbered(movie["mine"]),
                 "  The judge's order", numbered(movie["judge"]),
                 "  Your score()", numbered(movie["score"]),
-                "  Tags on this movie",
-                table_text(["Tag", "User", "Date"], movie["apps"]),
-                "  %d applications by %d people." % (len(movie["apps"]), movie["people"]),
                 "  Biggest disagreements, score() against the judge",
                 table_text(["Tag", "score() rank", "Judge rank"], movie["gaps"]), ""]
     return "\n".join(out)

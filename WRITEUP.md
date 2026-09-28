@@ -82,15 +82,33 @@ An order line looks like `296: nonlinear, hit men, dark comedy, ...`, the tags b
 
 **My ten movies:**
 
-XXXX
+177765, Coco (2017)
+260667, Encanto (2021)
+134853, Inside Out (2015)
+192283, Crazy Rich Asians (2018)
+180985, The Greatest Showman (2017)
+202439, Parasite (2019)
+72998, Avatar (2009)
+152081, Zootopia (2016)
+76093, How to Train Your Dragon (2010)
+111659, Maleficent (2014)
 
 **My own order of the ten most-used tags, written before looking at any data: my movie from step 1, then my nine others from step 4:**
 
 177765: family, heartwarming, music, afterlife, colorful, Pixar, animation, Dia de los Muertos, mexico, death
+260667: family, family relationships, magic, musical, colorful, shapeshifting, Animation, spanish language, colombia, simple story
+134853: introspective, imaginative, psychology, emotions, coming of age, childhood, emotional, creative, bittersweet, Pixar
+192283: romantic comedy, romcom, romance, wealth, visually appealing, Asian culture, Asian, based on a book, Awkwafina, Chinese culture
+180985: diversity, Positive message, circus, music, musical, great soundtrack, visually stunning, colorful, based on a true story, Hugh Jackman
+202439: social satire, class themes, social commentary, intelligent, dark comedy, black comedy, twists & turns, intense, korean, great writing
+72998: sci-fi, futuristic, aliens, environmental, thought-provoking, beautiful scenery, visually stunning, graphic design, James Cameron, predictable
+152081: xenophobia, racism, friendship, social commentary, cute, funny, tolerance, attention to detail, creative, visually stunning
+76093: friendship, adventure, dragons, depth of emotion, cute, funny, fantasy, vikings, predictable, animation
+111659: non-romantic love, twist ending, sleeping beauty, fairy tale, fantasy, visual effects, strong female lead, dragon, Disney, Angelina Jolie
 
 **One criterion I considered for the judge and rejected, and why** (the one I used is in `judge/criterion.md`)**:** XXXX
 
-**Agreement. The number `agreement.py` gives for your `score()`, for popularity and for your own order, and which of the three came closest to the judge:** XXXX
+**Agreement. The number `agreement.py` gives for your `score()`, for popularity and for your own order, and which of the three came closest to the judge:** score() and popularity are both 2.35 while my own order is 2.9 which is the closest to the judge. However, both score() and popularity are compared over 109 movies and 12 tags compared on the middle one while mine is only over 10 movies and 6 tags.
 
 **How the judge skill is built: the files it is made of and what each one does (about 150 words):**
 
@@ -106,28 +124,28 @@ XXXX
 
 ### The viewer and the disagreements
 
-**One thing `movie_results.html` showed me that was useful, and one thing about it that got in my way:** XXXX
+**One thing `movie_results.html` showed me that was useful, and one thing about it that got in my way:** If the purpose is only comparing score() with the judge's ratings, I think it's helpful to have the definition of disagreement at the beginning and ranking of them right on top of each other. It might be better if we do not include all data on tags on this movie which includes each user that applied that tag for the movie and the data they applied.
 
 Then three improvements. For each: what the page would not let you see, what you had Claude
 change, and what the changed page shows that the first draft did not.
 
-**Improvement 1:** XXXX
+**Improvement 1:** The first draft would require me to scroll through many lines of raw data before reaching the next useful data. I had you remove the tags on this movie section. The page now has rankings for 4 methods and the biggest disagrement table for each movie, which is cleaner to look at.
 
-**Improvement 2:** XXXX
+**Improvement 2:** Before, I could not see disagreements across movies since they are in different tables. I ask you to create a table with all disagreements. Now I see all disagreements in one table.
 
-**Improvement 3:** XXXX
+**Improvement 3:** Before, the table allows me to see all disagreements but I can not see the patterns clearly. I ask you to add the difference column and sorted the table by that. Now I can see where the largest disagrements are.
 
 Then the three disagreements. A disagreement is a movie and a tag where your `score()` and the
 judge are furthest apart. For each: the movie and the tag, where your `score()` put it and where
 the judge put it, and what you think accounts for the gap.
 
-**Disagreement 1:** XXXX
+**Disagreement 1:** Avatar (2009) — 7,342 ratings, love story. score() rank is 46 while Judge rank is 5. I think the gap accounts for how specific that tag is for the movie's story. Love story is the main thread of the plot (relationship between Jake and Neytiri), thus, it would rank high for the judge. However, most people would use more simple, obvious tags like sci-fi, which is why it ranks low for the score().
 
-**Disagreement 2:** XXXX
+**Disagreement 2:** Parasite (2019) — 2,790 ratings, surprise ending. score() rank is 37 while Judge rank is 9. I think the gap also accounts for how the tag describes the plot. The twist at the end is central to the story, which fits the judge criterion. But most people would use a more general tag like dark comedy (to describe the genre of the movie).
 
-**Disagreement 3:** XXXX
+**Disagreement 3:** Coco (2017) — 2,094 ratings, memory. score() rank is 22 while Judge rank is 2. I think the gap accounts for the same thing as the above two disagreements. Coco's story is built around being remembered by your family across generations, thus, it matches the judge's criterion and ranks very high (2). However, most people would use more generic tags like music or pixar to describe the movie.
 
-**One other high-level pattern in the results, and what you think is behind it:** XXXX
+**One other high-level pattern in the results, and what you think is behind it:** The other pattern is that score() ranks generic mood, genre, studio higher while the judge ranks them lower. (Examples: Avatar (2009) — 7,342 ratings - predictable - score() rank 6 - judge rank 49, Parasite (2019) — 2,790 ratings - suspenseful - score() rank 7 - judge rank 34, Inside Out (2015) — 4,353 ratings - pixar - score() rank 2 - judge rank 22) Tags like generic mood descriptor, studio or genre are things that anyone will agree on, thus, score() will rank them high due to the number of people applied them. The judge's criterion requires user to use a tag that is specific to the movie, thus, requires more effort.
 
 ## Predictions revisited
 

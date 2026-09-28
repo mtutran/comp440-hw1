@@ -86,6 +86,8 @@ and what it must write:
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import re
+
 import pandas as pd
 
 from load_data import REPO, load_all
@@ -123,8 +125,10 @@ def part2_tags(ratings, tags, movies, links):
     cleaning_report(tags)
 
     print("== (5) scores.csv ==")
+    write_scores(scored, tags)
 
     print("== (6) the four rankings ==")
+    four_rankings(tags, movies, scored)
 
 
 def clean_tag(raw):
@@ -140,6 +144,52 @@ def score(tags_df, ratings_df, movies_df):
     cleaned = tags_df.assign(tag=clean_tag(tags_df["tag"]))
     out = cleaned.groupby(["movieId", "tag"])["userId"].nunique().rename("score").reset_index()
     return out[["movieId", "tag", "score"]]
+
+
+def my_ten_movies():
+    """movieIds from the "My ten movies" slot in WRITEUP.md, one `id, title` per line."""
+    slot = (REPO / "WRITEUP.md").read_text(encoding="utf-8").split("**My ten movies:**")[1].split("**")[0]
+    return [int(m) for m in re.findall(r"^(\d+),", slot, flags=re.M)]
+
+
+def write_scores(scored, tags):
+    """scores.csv: a score for every movie-tag pair the judge is asked about."""
+    judge_movies = pd.read_csv(REPO / "judge" / "movies.csv", keep_default_na=False)
+    asked = judge_movies.assign(tag=judge_movies["tags"].str.split("|")).explode("tag")
+    asked = asked.rename(columns={"id": "movieId"})[["movieId", "tag"]]
+    vocab = {line.strip() for line in (REPO / "judge" / "vocabulary.txt").read_text(encoding="utf-8").splitlines()
+             if line.strip()}
+    ten = tags[tags["movieId"].isin(my_ten_movies())]
+    ten = ten.assign(tag=ten["tag"].str.strip().str.lower())
+    ten = ten[ten["tag"].isin(vocab)][["movieId", "tag"]].drop_duplicates()
+    asked = pd.concat([asked, ten]).drop_duplicates()
+    out = asked.merge(scored, on=["movieId", "tag"], how="left")
+    missing = out["score"].isna().sum()
+    out["score"] = out["score"].fillna(0).astype(int)
+    out.to_csv(REPO / "scores.csv", index=False)
+    print(f"  asked for {len(asked):,} movie-tag pairs over {asked['movieId'].nunique()} movies; "
+          f"wrote {len(out):,} to scores.csv ({missing} had no score and were written as 0)")
+
+
+def four_rankings(tags, movies, scored):
+    """For each of the ten movies: the counts, the student's own order, the judge's order and
+    score()'s order, each its own list, best first. The judge's and score()'s lists cover the
+    tags the judge rated on that movie; ties break alphabetically."""
+    from agreement import my_order_lines
+    titles = movies.set_index("movieId")["title"]
+    own = my_order_lines()
+    rated = pd.read_csv(REPO / "judge" / "ratings_movies.csv", keep_default_na=False)
+    for movie in my_ten_movies():
+        print(f"  {titles.get(movie, movie)}")
+        counts = tags.loc[tags["movieId"] == movie, "tag"].value_counts().head(10)
+        print("    the counts:     " + ", ".join(f"{t} ({n})" for t, n in counts.items()))
+        print("    my own order:   " + (", ".join(own[movie]) if movie in own else "not written yet"))
+        judged = rated[rated["id"] == movie].sort_values(["rating", "tag"], ascending=[False, True])
+        print("    the judge:      " + ", ".join(f"{t} ({r})" for t, r in zip(judged["tag"], judged["rating"])))
+        mine = scored[(scored["movieId"] == movie) & scored["tag"].isin(judged["tag"])]
+        mine = mine.sort_values(["score", "tag"], ascending=[False, True])
+        print("    my score():     " + ", ".join(f"{t} ({n})" for t, n in zip(mine["tag"], mine["score"])))
+        print()
 
 
 def cleaning_report(tags, top=5):
