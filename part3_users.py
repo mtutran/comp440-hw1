@@ -89,18 +89,32 @@ def add_me(ratings: pd.DataFrame, mine: pd.DataFrame) -> pd.DataFrame:
 
 # ------------------------------------------------------------------- yours to write ---
 
-def score(ratings: pd.DataFrame, tags: pd.DataFrame, movies: pd.DataFrame):
-    """What tags best describe a user. This one is yours; the handout's Part 3, step 2.
+MIN_TAGGERS = 10   # the student's rule: a movie carries a tag once this many distinct users applied it
 
-    Return one row per user-tag pair: userId, tag, score, higher meaning the tag describes
-    the user better. Start simply, test it on your own ratings, and improve it twice with
-    what your viewer and your judge show you."""
-    print("score(user, tag) is yours to write")
+
+def clean_tag(raw):
+    """The student's Part 2 rule, reused: strings that differ only in case or in leading or
+    trailing whitespace are one tag."""
+    return raw.str.lower().str.strip()
+
+
+def score(ratings: pd.DataFrame, tags: pd.DataFrame, movies: pd.DataFrame, users=(ME,)):
+    """The student's score(user, tag): the average of the user's ratings on the movies that
+    carry the tag, where a movie carries a tag once at least MIN_TAGGERS distinct users applied
+    it (after clean_tag). `movies` is how many of the user's rated movies carry the tag.
+
+    Computed for the users in `users` only: joining every rating to every tag its movie
+    carries is about 74 million rows over the whole set."""
+    cleaned = tags.assign(tag=clean_tag(tags["tag"]))
+    taggers = cleaned.groupby(["movieId", "tag"])["userId"].nunique()
+    carried = taggers[taggers >= MIN_TAGGERS].reset_index()[["movieId", "tag"]]
+    theirs = ratings[ratings["userId"].isin(users)][["userId", "movieId", "rating"]]
+    joined = theirs.merge(carried, on="movieId")
+    out = joined.groupby(["userId", "tag"])["rating"].agg(score="mean", movies="size").reset_index()
+    return out[["userId", "tag", "score", "movies"]]
 
 
 def part3_users(ratings, tags, movies, links):
-    print("part 3 unimplemented")  # delete this line when you start
-
     print("== (1) my ratings ==")
     mine, skipped = read_my_ratings()
     print(f'{len(mine)} rating(s) read from the "{SLOT}" slot in WRITEUP.md.')
@@ -118,7 +132,12 @@ def part3_users(ratings, tags, movies, links):
         print(f"{len(ratings):,} ratings, none of them yours yet.")
 
     print("== (2) score(user, tag) ==")
-    score(ratings, tags, movies)
+    scored = score(ratings, tags, movies)
+    top = scored[scored["userId"] == ME].sort_values(["score", "tag"], ascending=[False, True]).head(10)
+    print(f"  my ten best tags (userId {ME}), ties alphabetical:")
+    for _, row in top.iterrows():
+        print(f"    {row['score']:.2f}  from {row['movies']:>2} of my movies  {row['tag']}")
+    print(f"  {len(scored):,} user-tag rows, {scored['userId'].nunique():,} distinct user(s)")
 
 
 if __name__ == "__main__":

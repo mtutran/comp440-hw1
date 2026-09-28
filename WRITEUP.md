@@ -160,19 +160,40 @@ and no numbering, the movieId first and the rating last, as in `296, Pulp Fictio
 
 **My 20 ratings:**
 
-XXXX
+177765, Coco (2017), 4.0
+260667, Encanto (2021), 3.5
+134853, Inside Out (2015), 4.0
+192283, Crazy Rich Asians (2018), 3.0
+180985, The Greatest Showman (2017), 3.5
+202439, Parasite (2019), 4.5
+72998, Avatar (2009), 3.5
+152081, Zootopia (2016), 3.5
+76093, How to Train Your Dragon (2010), 4.0
+111659, Maleficent (2014), 3.0
+81847, Tangled (2010), 3.5
+166461, Moana (2016), 3.5
+1907, Mulan (1998), 4.0
+2081, Little Mermaid, The (1989), 2.5
+164909, La La Land (2016), 3.5
+5816, Harry Potter and the Chamber of Secrets (2002), 4.5
+106696, Frozen (2013), 3.0
+168366, Beauty and the Beast (2017), 3.5
+59784, Kung Fu Panda (2008), 3.5
+2355, Bug's Life, A (1998), 3.5
 
 **My `score(user, tag)`, in a sentence, and why I started there (about 100 words):**
 
-XXXX
+The score shows the average ratings of the user for movies that has at least 10 distinct users applied the tag. I started with this because this is an easy way to estimate how much the user likes that tag.
 
 **What my score says about me: my top ten tags, and whether they describe my taste (about 100 words):**
 
-XXXX
+Top ten from `part3_users.py` section (2), first version, all scored 4.50 from 1 of my movies each: alan rickman, allegorical, anticapitalist, black comedy, boarding school, bong joon-ho, capitalism, cinematography, class divide, class struggle.
+
+It seems like my top 10 are mostly from the same movie - Parasite, which I rate the highest among the 20 movies. They do not necessarily describe my taste, this is because of the small sample size with selection bias and maybe because the threshold of at least 10 distinct users applied the tag is too low.
 
 **What my user viewer shows and why I chose that (about 100 words):**
 
-XXXX
+My user viewer shows their rating stats, top 10 tags by score, 10 favorite and 10 least favorite movies. I chose these so that I could see whether their top tags fit their taste.
 
 **What I put in the description column for a person, and why (about 150 words):**
 
