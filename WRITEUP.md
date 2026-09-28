@@ -48,7 +48,7 @@ Code: `part2_tags.py`.
 
 **Its most misleading tag in the count-ordered list, and why it misleads:** I think none of the tags is really misleading, but the most misleading one is probably death since the story's overall theme is not about being died, it is a warm and colorful continuation of life.
 
-**What I learned about how MovieLens collects ratings and tags, from rating and tagging my movie myself (about 100 words):** XXXX
+**What I learned about how MovieLens collects ratings and tags, from rating and tagging my movie myself (about 100 words):** When I hovered over the stars to rate, there are words to describe what that rating means (from awful to must watch). Once I rated, the date rated will appear, but it is also really easy to clear the rating. For adding tags, I can easily click to add a tag to my list and it allows me to choose whether I like it or neutral or dislike it about the movie, or even to say that the tag does not apply to the movie. I could also type any word and add it as a tag.
 
 ### Up close
 
@@ -106,21 +106,21 @@ An order line looks like `296: nonlinear, hit men, dark comedy, ...`, the tags b
 76093: friendship, adventure, dragons, depth of emotion, cute, funny, fantasy, vikings, predictable, animation
 111659: non-romantic love, twist ending, sleeping beauty, fairy tale, fantasy, visual effects, strong female lead, dragon, Disney, Angelina Jolie
 
-**One criterion I considered for the judge and rejected, and why** (the one I used is in `judge/criterion.md`)**:** XXXX
+**One criterion I considered for the judge and rejected, and why** (the one I used is in `judge/criterion.md`)**:** I considered weighted by how relevant the tag is based on the movie's genre. However, I rejected it because this would make the whole list describes the movie's genre.
 
 **Agreement. The number `agreement.py` gives for your `score()`, for popularity and for your own order, and which of the three came closest to the judge:** score() and popularity are both 2.35 while my own order is 2.9 which is the closest to the judge. However, both score() and popularity are compared over 109 movies and 12 tags compared on the middle one while mine is only over 10 movies and 6 tags.
 
 **How the judge skill is built: the files it is made of and what each one does (about 150 words):**
 
-XXXX
+SKILL.md makes /judge a command, using the description to know when the skill applies and point to README.md which explains how to run the judge and what happends at each step. judge.py is the code that implements those steps. It builds the prompt, send to CLAUDE and writes ratings back to CSV. system.md is the system prompt sent with every request. criterion.md has the paragraph that describes the criterion for the judge to apply. The inputs are movies.csv and vocabulary.txt which include all movies and tags that the judge can rate.
 
 **What happens when I run `/judge`, from the first check to the CSV (about 150 words):**
 
-XXXX
+judge.py first checks that movies.csv exists and ratings_movies.csv is not already there unless I passed --force. It then reads criterion.md, system.md and movies.csv, adding my movies from WRITEUP.md. It rates the movies and writes the ratings to ratings_movies.csv.
 
 **Why a skill: what a skill like this gives you that a script or a prompt alone does not, and where you would use one next (about 100 words):**
 
-XXXX
+A script alone runs the steps but would not allow me to ask for explanation, a prompt alone would require me to have one conversation per movie. The skill helped me run the same steps efficiently and explain things (noted things) along the way. I would use one like this in other homeworks for this course.
 
 ### The viewer and the disagreements
 
@@ -149,7 +149,7 @@ the judge put it, and what you think accounts for the gap.
 
 ## Predictions revisited
 
-**Which of my three predictions were wrong, and what I make of each miss:** XXXX
+**Which of my three predictions were wrong, and what I make of each miss:** The first wrong prediction is my tag emotional for Coco, it is not in the top 10 most popular tags of the movie. I think this is because of the word I use, it should be heartwarming instead of emotional. The second wrong prediction is that I predict 10 out of 100 people rated will tag, I think the difference might come from how the subset of data is created in this assignment (filter to active users and popular movies). My last wrong prediction is that a person's tag can make up most of what appears, I think this is because the movie I chose has a good amount of ratings, so it did not happen that way.
 
 ## Part 3. What tags best describe a user?
 
