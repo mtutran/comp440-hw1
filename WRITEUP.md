@@ -223,15 +223,15 @@ making Claude look good or bad.
 **A moment where Claude was wrong or overconfident, how you caught it, and where it
 happened. Name the part and the step, so the moment can be found:** Improvement 2 in Part 3: I sent Claude my answer, it said it re-ran the count and got 6 instead of 7. However, after that, it said "I need to correct an error" and 7 was correct.
 
-**One call where you overrode Claude, and why:** XXXX
+**One call where you overrode Claude, and why:** Why my definition Part 2: Claude said only 12 repeat applications out of 1,244,210 remain after cleaning, which challenges my claim that counting distinct users stops one user from inflating a tag's score. I still kept it because even though the count is small, it is not zero and we are not filtering those out. Also this is a small subset of the data with selection bias and I want to be able to use the rule on the full data set too.
 
-**What you would hand to Claude sooner next time:** XXXX
+**What you would hand to Claude sooner next time:** Next time if there are tasks that requires compare things, I would ask Claude to point out the differences between two files or create a table to see things side by side.
 
-**Did Claude name the misleading tag in Part 2 step 1 before you did? What happened:** XXXX
+**Did Claude name the misleading tag in Part 2 step 1 before you did? What happened:** No, Claude did not.
 
 **The figure. Would asking Claude "what does this show?" have produced your sentence, and what
-would have been missing from it:** XXXX
+would have been missing from it:** I did not ask it, so I do not know what Claude would actually produced. My guess is that it could mention the same things from analyzing the figure. However, it could have missed the part whether the figure matches my expectation and I'm not sure whether it will comment on the 2021 pike.
 
-**Hours spent:** XXXX
+**Hours spent:** 6
 
-**Anyone who helped you, or "no one":** XXXX
+**Anyone who helped you, or "no one":** no one
