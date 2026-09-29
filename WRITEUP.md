@@ -209,11 +209,11 @@ XXXX
 
 **Improvement 1: what I changed in the scoring function, what the judge and the viewer showed before and after (about 150 words):**
 
-XXXX
+I changed score from a normal average to a shrunken average, so a tag appears in only one movie would be pulled toward the user's average. Before, top 10 are mostly dominated by tags from a single highest rating movie. After, more common tags rise to the top. The judege comparison also fixed some disagreements. For example, "black comedy" went from a score rank of 1 to 4 against a judge rank of 9 which makes its difference went from −8 to −5.
 
 **Improvement 2: the same (about 150 words):**
 
-XXXX
+I changed the score so that each movie counts toward a tag based on how much the tag is applied on that movie and lowered k to 0.1. The judge's mean gap did not change much, only 0.17 (changed from 9.18 to 9.01 from part3_users.py section (5)). part3_users.py section (5) shows that my top ten went from having seven single movie tag to nine since the weighting only measures how much a tag applied to a movie, not how many movies support the tag. My predictions was wrong, cause the sum of weights measures how much a tag applies to a movie, not how many movies support it. The gaps did not change much (0.17), so it just reorder the tags, not actually improving.
 
 ## Part 4. Working with Claude
 

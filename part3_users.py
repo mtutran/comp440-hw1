@@ -98,20 +98,127 @@ def clean_tag(raw):
     return raw.str.lower().str.strip()
 
 
-def score(ratings: pd.DataFrame, tags: pd.DataFrame, movies: pd.DataFrame, users=(ME,)):
-    """The student's score(user, tag): the average of the user's ratings on the movies that
-    carry the tag, where a movie carries a tag once at least MIN_TAGGERS distinct users applied
-    it (after clean_tag). `movies` is how many of the user's rated movies carry the tag.
+K = 0.1   # the student's damping strength (5 in improvement 1, 0.1 in improvement 2)
+
+
+def score(ratings: pd.DataFrame, tags: pd.DataFrame, movies: pd.DataFrame, users=(ME,), k=None, weighted=True):
+    """The student's score(user, tag).
+
+    First version: the average of the user's ratings on the movies that carry the tag, where a
+    movie carries a tag once at least MIN_TAGGERS distinct users applied it (after clean_tag).
+    Improvement 1: that average is damped toward the user's overall average rating, more
+    strongly when few of their movies carry the tag:
+
+        (sum of their ratings on those movies + K * their overall average) / (those movies + K)
+
+    Improvement 2: each movie counts by how much the tag applies to it, relative to that
+    movie: the distinct users who applied the tag to the movie, over the movie's distinct
+    user-tag pairs. The weights replace the plain movie count:
+
+        (sum of weight * rating + K * their overall average) / (sum of weight + K)
+
+    `movies` is how many of the user's rated movies carry the tag, and `weight` is the sum of
+    their weights.
+
+    `k` defaults to K. weighted=False gives every movie a weight of 1, which is improvement 1
+    again; section (5) uses k=5, weighted=False as the before.
 
     Computed for the users in `users` only: joining every rating to every tag its movie
     carries is about 74 million rows over the whole set."""
+    k = K if k is None else k
+    cleaned = tags.assign(tag=clean_tag(tags["tag"]))
+    pairs = cleaned[["movieId", "userId", "tag"]].drop_duplicates()
+    per_movie = pairs.groupby("movieId").size().rename("pairs")
+    taggers = pairs.groupby(["movieId", "tag"]).size().rename("taggers").reset_index()
+    carried = taggers[taggers["taggers"] >= MIN_TAGGERS].join(per_movie, on="movieId")
+    carried["weight"] = carried["taggers"] / carried["pairs"] if weighted else 1.0
+    theirs = ratings[ratings["userId"].isin(users)][["userId", "movieId", "rating"]]
+    overall = theirs.groupby("userId")["rating"].mean().rename("overall")
+    joined = theirs.merge(carried[["movieId", "tag", "weight"]], on="movieId")
+    joined["weighted"] = joined["weight"] * joined["rating"]
+    out = joined.groupby(["userId", "tag"]).agg(total=("weighted", "sum"), weight=("weight", "sum"),
+                                                movies=("rating", "size")).reset_index()
+    out = out.join(overall, on="userId")
+    out["score"] = (out["total"] + k * out["overall"]) / (out["weight"] + k)
+    return out[["userId", "tag", "score", "movies", "weight"]]
+
+
+# The student's rules for judge/users.csv.
+JUDGE_USERS = [ME, 11912, 23753, 66408, 73741, 132067, 144545, 158334, 167647, 189485]
+LISTED = 10        # favorite and least favorite movies in each description
+MOVIE_TAGS = 10    # most-used tags shown for each listed movie
+
+
+def write_judge_users(ratings, tags, movies, out=REPO / "judge" / "users.csv"):
+    """judge/users.csv: id, description, tags.
+
+    description: the person's LISTED favorite and LISTED least favorite movies, each with the
+    person's rating and the movie's MOVIE_TAGS most-used tags (cleaned, by applications). Ties
+    in a person's ratings go to the movie more users rated; any tie left after that goes to the
+    lower movieId.
+    tags: every vocabulary tag that appears in the description, alphabetical, so the order
+    says nothing about how common a tag is."""
+    vocab = {w.strip() for w in (REPO / "judge" / "vocabulary.txt").read_text(encoding="utf-8").splitlines()
+             if w.strip()}
+    titles = movies.set_index("movieId")["title"]
+    raters = ratings.groupby("movieId").size().rename("raters")
+    cleaned = tags.assign(tag=clean_tag(tags["tag"]))
+    counts = cleaned.groupby(["movieId", "tag"]).size().rename("n").reset_index()
+    counts = counts.sort_values(["movieId", "n", "tag"], ascending=[True, False, True])
+    top = counts.groupby("movieId").head(MOVIE_TAGS).groupby("movieId")["tag"].apply(list)
+
+    rows = []
+    for user in JUDGE_USERS:
+        theirs = ratings[ratings["userId"] == user].join(raters, on="movieId")
+        best = theirs.sort_values(["rating", "raters", "movieId"], ascending=[False, False, True]).head(LISTED)
+        worst = theirs.sort_values(["rating", "raters", "movieId"], ascending=[True, False, True]).head(LISTED)
+
+        def listing(frame):
+            return "; ".join(f"{titles[m]} (rated {r}): {', '.join(top.get(m, []))}"
+                             for m, r in zip(frame["movieId"], frame["rating"]))
+        description = (f"Favorite movies, with this person's rating and each movie's most-used tags: "
+                       f"{listing(best)}. Least favorite movies, the same way: {listing(worst)}.")
+        shown = {t for m in pd.concat([best, worst])["movieId"] for t in top.get(m, [])}
+        rows.append({"id": user, "description": description, "tags": "|".join(sorted(shown & vocab))})
+    frame = pd.DataFrame(rows)
+    frame.to_csv(out, index=False)
+    return frame
+
+
+def original_score(ratings, tags, movies, users):
+    """The first version of score(user, tag), kept fixed so the tie rule below does not move
+    when score() is improved: the user's average rating on the movies carrying the tag, where
+    a movie carries a tag once at least 10 distinct users applied it."""
     cleaned = tags.assign(tag=clean_tag(tags["tag"]))
     taggers = cleaned.groupby(["movieId", "tag"])["userId"].nunique()
-    carried = taggers[taggers >= MIN_TAGGERS].reset_index()[["movieId", "tag"]]
-    theirs = ratings[ratings["userId"].isin(users)][["userId", "movieId", "rating"]]
+    carried = taggers[taggers >= 10].reset_index()[["movieId", "tag"]]
+    raters = ratings.groupby("movieId").size().rename("raters")
+    theirs = ratings[ratings["userId"].isin(users)][["userId", "movieId", "rating"]].join(raters, on="movieId")
     joined = theirs.merge(carried, on="movieId")
-    out = joined.groupby(["userId", "tag"])["rating"].agg(score="mean", movies="size").reset_index()
-    return out[["userId", "tag", "score", "movies"]]
+    return joined.groupby(["userId", "tag"]).agg(original=("rating", "mean"), raters=("raters", "sum")).reset_index()
+
+
+def side_by_side(ratings, tags, movies, out=REPO / "judge_vs_score.csv", **opts):
+    """score(user, tag) beside the judge's rating on every judged pair that has a score.
+
+    The student's measure: per user, rank the pairs by score and by the judge's rating, best
+    first, and take score rank minus judge rank. Ties, both rankings: the user's original
+    average rating on the movies carrying the tag, higher first; then the total number of
+    users who rated those movies, more first; then the tag, alphabetically."""
+    judged = pd.read_csv(REPO / "judge" / "ratings_users.csv", keep_default_na=False)
+    judged = judged.rename(columns={"id": "userId", "rating": "judge"})
+    users = sorted(judged["userId"].unique())
+    both = judged.merge(score(ratings, tags, movies, users=users, **opts), on=["userId", "tag"])
+    both = both.merge(original_score(ratings, tags, movies, users), on=["userId", "tag"])
+    for col, rank in (("score", "score_rank"), ("judge", "judge_rank")):
+        both = both.sort_values(["userId", col, "original", "raters", "tag"],
+                                ascending=[True, False, False, False, True])
+        both[rank] = both.groupby("userId").cumcount() + 1
+    both["difference"] = both["score_rank"] - both["judge_rank"]
+    both = both.sort_values(["userId", "difference", "tag"], ascending=[True, False, True])
+    cols = ["userId", "tag", "score", "movies", "judge", "score_rank", "judge_rank", "difference", "original", "raters"]
+    both[cols].to_csv(out, index=False)
+    return both[cols], len(judged)
 
 
 def part3_users(ratings, tags, movies, links):
@@ -138,6 +245,45 @@ def part3_users(ratings, tags, movies, links):
     for _, row in top.iterrows():
         print(f"    {row['score']:.2f}  from {row['movies']:>2} of my movies  {row['tag']}")
     print(f"  {len(scored):,} user-tag rows, {scored['userId'].nunique():,} distinct user(s)")
+
+    print("== (3) judge/users.csv ==")
+    judged = write_judge_users(ratings, tags, movies)
+    per = judged["tags"].str.split("|").str.len()
+    have = score(ratings, tags, movies, users=JUDGE_USERS)
+    pairs = judged.assign(tag=judged["tags"].str.split("|")).explode("tag")[["id", "tag"]]
+    covered = pairs.merge(have, left_on=["id", "tag"], right_on=["userId", "tag"]).shape[0]
+    print(f"  wrote judge/users.csv: {len(judged)} people, {per.sum():,} tag ratings to ask for "
+          f"({per.min()} to {per.max()} per person); {covered:,} of those pairs have a score(user, tag)")
+
+    print("== (4) score() beside the judge ==")
+    if (REPO / "judge" / "ratings_users.csv").exists():
+        both, rated = side_by_side(ratings, tags, movies)
+        print(f"  {rated:,} judged pairs, {len(both):,} with a score(user, tag); wrote judge_vs_score.csv")
+        print("  every pair, all users together, sorted by difference (score rank - judge rank), largest first:")
+        table = both.sort_values(["difference", "userId", "tag"], ascending=[False, True, True])
+        print(table[["userId", "tag", "score", "movies", "judge", "score_rank", "judge_rank", "difference"]]
+              .to_string(index=False, float_format="{:.2f}".format))
+    else:
+        print("  judge/ratings_users.csv is not here yet")
+
+    print("== (5) before and after improvement 2 ==")
+    print("  before: improvement 1, k = 5, every movie weighted 1; after: improvement 2, k = "
+          f"{K}, weighted")
+    versions = (("before", dict(k=5, weighted=False)), ("after", {}))
+    for name, opts in versions:
+        mine = score(ratings, tags, movies, **opts)
+        top = mine.sort_values(["score", "tag"], ascending=[False, True]).head(10)
+        print(f"  {name}: my ten best tags, ties alphabetical; {(top['movies'] == 1).sum()} of the "
+              f"ten come from 1 of my movies")
+        for _, row in top.iterrows():
+            print(f"    {row['score']:.2f}  from {row['movies']:>2} of my movies  {row['tag']}")
+    if (REPO / "judge" / "ratings_users.csv").exists():
+        files = {"before": REPO / "judge_vs_score_v2.csv", "after": REPO / "judge_vs_score.csv"}
+        for name, opts in versions:
+            both, _ = side_by_side(ratings, tags, movies, out=files[name], **opts)
+            gap = both["difference"].abs()
+            print(f"  {name}: |score rank - judge rank| over {len(both):,} judged pairs, all users: "
+                  f"mean {gap.mean():.2f}, median {gap.median():.1f}; wrote {files[name].name}")
 
 
 if __name__ == "__main__":

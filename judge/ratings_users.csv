@@ -1,0 +1,775 @@
+id,tag,rating
+999999,adventure,5
+999999,aliens,2
+999999,animation,2
+999999,anti-hero,2
+999999,based on a book,3
+999999,beautiful,1
+999999,beautiful scenery,2
+999999,bittersweet,3
+999999,black comedy,3
+999999,comedy,1
+999999,coming of age,3
+999999,cute,5
+999999,dark comedy,3
+999999,death,3
+999999,disney,1
+999999,fairy tale,1
+999999,family,3
+999999,fantasy,5
+999999,fantasy world,3
+999999,feminism,3
+999999,friendship,5
+999999,funny,4
+999999,futuristic,2
+999999,great soundtrack,2
+999999,heartwarming,3
+999999,imaginative,3
+999999,intelligent,3
+999999,intense,3
+999999,magic,1
+999999,martial arts,2
+999999,music,2
+999999,musical,1
+999999,mythology,1
+999999,pixar,5
+999999,predictable,5
+999999,psychology,3
+999999,racism,2
+999999,romance,1
+999999,romantic comedy,1
+999999,sci-fi,2
+999999,social commentary,5
+999999,strong female lead,1
+999999,thought-provoking,2
+999999,twist ending,1
+999999,twists & turns,3
+999999,visually appealing,1
+999999,visually stunning,2
+11912,action,4
+11912,adventure,2
+11912,apocalypse,1
+11912,atmospheric,5
+11912,based on a book,2
+11912,batman,2
+11912,biography,1
+11912,black comedy,2
+11912,brad pitt,2
+11912,british,2
+11912,british comedy,2
+11912,christian bale,2
+11912,christopher nolan,2
+11912,coen brothers,2
+11912,comedy,1
+11912,comic book,1
+11912,controversial,1
+11912,corruption,2
+11912,crime,2
+11912,crude humor,2
+11912,dark,5
+11912,dark comedy,2
+11912,dark humor,2
+11912,drama,1
+11912,epic,5
+11912,fantasy,2
+11912,fantasy world,2
+11912,feel good movie,2
+11912,friendship,2
+11912,funny,1
+11912,george clooney,2
+11912,great acting,2
+11912,great ending,2
+11912,happy ending,2
+11912,heist,2
+11912,high school,2
+11912,hilarious,1
+11912,historical,1
+11912,history,2
+11912,humorous,1
+11912,jack nicholson,2
+11912,jim carrey,1
+11912,leonardo dicaprio,4
+11912,loneliness,1
+11912,magic,2
+11912,martin scorsese,2
+11912,marvel,1
+11912,matt damon,5
+11912,mental illness,1
+11912,mockumentary,1
+11912,morgan freeman,2
+11912,organized crime,2
+11912,parody,2
+11912,plot twist,2
+11912,psychological,1
+11912,psychology,2
+11912,religion,1
+11912,revenge,2
+11912,road trip,1
+11912,robert downey jr.,1
+11912,satire,1
+11912,serial killer,2
+11912,social commentary,1
+11912,stupid,1
+11912,superhero,2
+11912,survival,1
+11912,suspense,5
+11912,thought-provoking,2
+11912,thriller,5
+11912,tom cruise,1
+11912,tom hanks,1
+11912,true story,1
+11912,twist ending,5
+11912,unique,1
+11912,vampires,1
+11912,violence,1
+11912,war,2
+11912,witty,2
+11912,zombies,2
+23753,1980s,2
+23753,action,5
+23753,adventure,5
+23753,alternate reality,1
+23753,animation,1
+23753,anthony hopkins,1
+23753,based on a true story,1
+23753,biography,1
+23753,black and white,1
+23753,brad pitt,1
+23753,car chase,1
+23753,classic,4
+23753,comedy,5
+23753,coming of age,2
+23753,crime,1
+23753,cult film,2
+23753,cute,1
+23753,dialogue,2
+23753,disney,1
+23753,disturbing,1
+23753,drama,1
+23753,emotional,1
+23753,fairy tale,1
+23753,fantasy,2
+23753,friendship,1
+23753,funny,1
+23753,great acting,1
+23753,great ending,2
+23753,great performances,1
+23753,great soundtrack,1
+23753,gritty,2
+23753,harrison ford,5
+23753,historical,1
+23753,history,1
+23753,horror,2
+23753,humorous,1
+23753,imdb top 250,1
+23753,inspirational,2
+23753,jack nicholson,2
+23753,mafia,1
+23753,martin scorsese,1
+23753,morgan freeman,2
+23753,music,1
+23753,musical,1
+23753,nazis,2
+23753,new york city,2
+23753,notable soundtrack,1
+23753,organized crime,1
+23753,oscar (best picture),1
+23753,pixar,1
+23753,prison,2
+23753,psychological,2
+23753,robert de niro,1
+23753,romance,1
+23753,sci-fi,4
+23753,science fiction,1
+23753,sequel,1
+23753,space,5
+23753,stanley kubrick,2
+23753,star wars,2
+23753,stephen king,5
+23753,steven spielberg,1
+23753,suspense,2
+23753,thought-provoking,1
+23753,time travel,1
+23753,tom hanks,2
+23753,true story,1
+23753,twist ending,2
+23753,visually appealing,2
+23753,western,1
+23753,witty,1
+23753,world war ii,1
+66408,action,5
+66408,adventure,1
+66408,aliens,3
+66408,apocalypse,2
+66408,atmospheric,1
+66408,based on a book,3
+66408,black comedy,1
+66408,boring,1
+66408,chick flick,1
+66408,cinematography,3
+66408,classic,5
+66408,comedy,1
+66408,coming of age,3
+66408,creepy,1
+66408,crime,3
+66408,dark comedy,1
+66408,dark hero,1
+66408,disturbing,3
+66408,drama,3
+66408,drugs,1
+66408,dystopia,1
+66408,edward norton,3
+66408,emotional,3
+66408,epic,5
+66408,espionage,1
+66408,existentialism,1
+66408,family,1
+66408,friendship,5
+66408,funny,1
+66408,good dialogue,3
+66408,gothic,1
+66408,great acting,3
+66408,great ending,3
+66408,gritty,3
+66408,high school,1
+66408,hilarious,1
+66408,historical,5
+66408,history,5
+66408,horror,1
+66408,humorous,3
+66408,inspirational,5
+66408,jim carrey,1
+66408,mafia,3
+66408,martin scorsese,3
+66408,masterpiece,3
+66408,mindfuck,1
+66408,morgan freeman,3
+66408,multiple storylines,1
+66408,nonlinear,1
+66408,nudity (topless),2
+66408,organized crime,3
+66408,original,1
+66408,parody,1
+66408,post-apocalyptic,1
+66408,powerful ending,3
+66408,prison,5
+66408,psychology,1
+66408,quirky,1
+66408,racism,3
+66408,realistic,3
+66408,revenge,3
+66408,road trip,1
+66408,robert de niro,3
+66408,romance,1
+66408,sci-fi,1
+66408,sequel,1
+66408,silly,1
+66408,social commentary,3
+66408,spy,1
+66408,stephen king,5
+66408,steven spielberg,3
+66408,stupid,1
+66408,surreal,1
+66408,survival,1
+66408,suspense,1
+66408,teen,1
+66408,thought-provoking,5
+66408,tom cruise,1
+66408,tom hanks,3
+66408,twist ending,3
+66408,violence,3
+66408,war,5
+66408,will smith,3
+66408,world war ii,3
+73741,action,1
+73741,adventure,1
+73741,aliens,1
+73741,anthony hopkins,1
+73741,apocalypse,1
+73741,based on a true story,4
+73741,bittersweet,5
+73741,black and white,2
+73741,black comedy,1
+73741,brad pitt,1
+73741,classic,2
+73741,coen brothers,1
+73741,comedy,1
+73741,confusing,1
+73741,corruption,1
+73741,crime,1
+73741,cult film,2
+73741,cute,2
+73741,dark comedy,1
+73741,dark humor,1
+73741,disturbing,2
+73741,drama,5
+73741,drugs,2
+73741,emotional,4
+73741,epic,2
+73741,espionage,1
+73741,family,2
+73741,fantasy,1
+73741,feel-good,2
+73741,friendship,2
+73741,gay,2
+73741,good dialogue,2
+73741,great acting,1
+73741,great ending,2
+73741,great soundtrack,1
+73741,harrison ford,1
+73741,high school,2
+73741,historical,5
+73741,history,2
+73741,homosexuality,2
+73741,humorous,1
+73741,inspirational,5
+73741,morgan freeman,2
+73741,multiple storylines,2
+73741,music,2
+73741,nonlinear,2
+73741,oscar (best picture),2
+73741,overrated,2
+73741,politics,1
+73741,predictable,1
+73741,prison,2
+73741,quentin tarantino,2
+73741,quirky,1
+73741,revenge,2
+73741,romance,1
+73741,romantic,1
+73741,samuel l. jackson,2
+73741,sci-fi,1
+73741,science,1
+73741,science fiction,1
+73741,space,1
+73741,star wars,1
+73741,stephen king,2
+73741,steven spielberg,2
+73741,suspense,2
+73741,thought-provoking,5
+73741,tom cruise,1
+73741,tom hanks,5
+73741,touching,2
+73741,true story,5
+73741,twist ending,2
+73741,violence,2
+73741,war,4
+73741,will smith,1
+73741,witty,1
+73741,world war ii,2
+132067,action,1
+132067,adventure,5
+132067,atmospheric,5
+132067,based on a book,5
+132067,based on a true story,3
+132067,beautiful scenery,3
+132067,beautifully filmed,5
+132067,bittersweet,5
+132067,black comedy,4
+132067,boring,1
+132067,british comedy,3
+132067,classic,5
+132067,coen brothers,3
+132067,comedy,2
+132067,crude humor,1
+132067,cult film,3
+132067,dark comedy,5
+132067,drama,3
+132067,dreamlike,3
+132067,emotional,3
+132067,epic,5
+132067,espionage,1
+132067,excellent script,3
+132067,fantasy,5
+132067,fantasy world,3
+132067,feel-good,3
+132067,friendship,5
+132067,funny,1
+132067,great acting,5
+132067,great dialogue,3
+132067,great ending,5
+132067,great soundtrack,5
+132067,hilarious,1
+132067,inspirational,5
+132067,jim carrey,2
+132067,kevin spacey,3
+132067,magic,5
+132067,memory,3
+132067,military,1
+132067,morgan freeman,3
+132067,nonlinear,3
+132067,nudity (full frontal),1
+132067,nudity (topless),1
+132067,paris,3
+132067,philosophy,3
+132067,prison,3
+132067,psychology,5
+132067,quirky,5
+132067,quotable,1
+132067,rape,1
+132067,remake,1
+132067,road trip,2
+132067,romance,5
+132067,satirical,3
+132067,sexuality,3
+132067,social commentary,3
+132067,spy,1
+132067,stephen king,3
+132067,steven spielberg,1
+132067,strong female lead,1
+132067,stylized,5
+132067,surreal,5
+132067,surrealism,3
+132067,thought-provoking,5
+132067,tom hanks,3
+132067,touching,3
+132067,twist ending,5
+132067,visually appealing,3
+132067,whimsical,3
+144545,alternate reality,1
+144545,atmospheric,2
+144545,based on a true story,2
+144545,beautifully filmed,1
+144545,biography,2
+144545,black and white,2
+144545,black comedy,1
+144545,brad pitt,1
+144545,cerebral,2
+144545,christopher nolan,1
+144545,classic,5
+144545,comedy,2
+144545,complicated,1
+144545,cult film,5
+144545,dark,2
+144545,dark comedy,1
+144545,disturbing,2
+144545,drama,5
+144545,dreamlike,1
+144545,dreams,1
+144545,drugs,1
+144545,dystopia,2
+144545,edward norton,1
+144545,emotional,2
+144545,excellent script,1
+144545,fairy tale,1
+144545,fantasy,1
+144545,feel-good,1
+144545,friendship,2
+144545,great acting,1
+144545,great cinematography,2
+144545,great ending,2
+144545,great soundtrack,1
+144545,heartwarming,2
+144545,imagination,1
+144545,imdb top 250,2
+144545,inspirational,5
+144545,jack nicholson,2
+144545,kevin spacey,1
+144545,loneliness,2
+144545,love story,1
+144545,martin scorsese,2
+144545,memory,1
+144545,mental illness,5
+144545,mindfuck,1
+144545,morgan freeman,2
+144545,multiple storylines,2
+144545,music,1
+144545,mystery,1
+144545,new york city,2
+144545,nonlinear,1
+144545,paris,1
+144545,philosophy,1
+144545,powerful ending,2
+144545,prison,2
+144545,psychological,1
+144545,psychology,4
+144545,quirky,2
+144545,racism,2
+144545,relationships,1
+144545,road trip,2
+144545,robert de niro,2
+144545,romance,1
+144545,satire,2
+144545,satirical,1
+144545,serial killer,1
+144545,sexuality,1
+144545,social commentary,4
+144545,stanley kubrick,2
+144545,stephen king,2
+144545,stylized,1
+144545,surreal,1
+144545,surrealism,1
+144545,thought-provoking,1
+144545,true story,2
+144545,twist ending,1
+144545,violence,5
+144545,virtual reality,1
+144545,visually appealing,1
+144545,whimsical,1
+158334,action,2
+158334,adventure,3
+158334,al pacino,3
+158334,aliens,1
+158334,alternate reality,3
+158334,anthony hopkins,3
+158334,anti-hero,1
+158334,apocalypse,3
+158334,artificial intelligence,5
+158334,assassin,1
+158334,atmospheric,3
+158334,based on a true story,1
+158334,batman,1
+158334,biography,1
+158334,black comedy,5
+158334,brad pitt,3
+158334,car chase,1
+158334,cinematography,1
+158334,classic,5
+158334,comedy,2
+158334,comic book,1
+158334,complicated,3
+158334,conspiracy,3
+158334,crime,3
+158334,cult film,3
+158334,cyberpunk,3
+158334,dark,2
+158334,dark comedy,5
+158334,dark hero,1
+158334,disturbing,5
+158334,drama,1
+158334,drugs,2
+158334,dystopia,5
+158334,epic,1
+158334,espionage,1
+158334,excellent script,5
+158334,family,1
+158334,father-son relationship,1
+158334,friendship,2
+158334,funny,1
+158334,future,3
+158334,george clooney,1
+158334,good dialogue,3
+158334,great acting,5
+158334,great ending,5
+158334,harrison ford,3
+158334,inspirational,3
+158334,kevin spacey,5
+158334,mafia,3
+158334,masterpiece,3
+158334,mindfuck,3
+158334,morgan freeman,4
+158334,multiple storylines,3
+158334,nazis,3
+158334,nonlinear,3
+158334,organized crime,5
+158334,original plot,3
+158334,oscar (best picture),1
+158334,philosophical,3
+158334,philosophy,3
+158334,plot twist,1
+158334,powerful ending,3
+158334,prison,3
+158334,psychological,3
+158334,psychology,5
+158334,quentin tarantino,3
+158334,racism,1
+158334,remake,1
+158334,robots,3
+158334,samuel l. jackson,3
+158334,sci-fi,4
+158334,serial killer,5
+158334,sexuality,3
+158334,social commentary,2
+158334,stephen king,3
+158334,steven spielberg,3
+158334,storytelling,3
+158334,superhero,1
+158334,surrealism,3
+158334,suspense,5
+158334,thought-provoking,5
+158334,thriller,1
+158334,tim burton,1
+158334,time travel,3
+158334,twist ending,5
+158334,violence,3
+158334,virtual reality,3
+158334,will smith,1
+167647,acting,1
+167647,adventure,1
+167647,alternate reality,2
+167647,animation,1
+167647,atmospheric,2
+167647,based on a book,1
+167647,beautifully filmed,2
+167647,bittersweet,2
+167647,black and white,3
+167647,black comedy,5
+167647,cinematography,3
+167647,classic,3
+167647,clever,1
+167647,comedy,1
+167647,coming of age,1
+167647,complicated,1
+167647,cult film,1
+167647,cute,1
+167647,dark,3
+167647,dark comedy,5
+167647,dark humor,1
+167647,depressing,4
+167647,disney,1
+167647,disturbing,5
+167647,dreamlike,5
+167647,drugs,4
+167647,dystopia,3
+167647,emotional,3
+167647,epic,1
+167647,excellent script,2
+167647,fantasy,1
+167647,feel-good,2
+167647,funny,1
+167647,good acting,3
+167647,good dialogue,2
+167647,great acting,4
+167647,great ending,1
+167647,great soundtrack,1
+167647,hallucinatory,3
+167647,high school,1
+167647,hilarious,1
+167647,inspirational,3
+167647,intellectual,1
+167647,intense,3
+167647,jim carrey,5
+167647,kevin spacey,3
+167647,leonardo dicaprio,1
+167647,magic,1
+167647,masterpiece,3
+167647,melancholy,3
+167647,memory,3
+167647,mindfuck,4
+167647,multiple storylines,2
+167647,music,2
+167647,mystery,2
+167647,nonlinear,4
+167647,notable soundtrack,1
+167647,nudity (topless),1
+167647,original,1
+167647,original plot,2
+167647,paris,3
+167647,philosophy,5
+167647,pixar,1
+167647,plot twist,1
+167647,psychological,3
+167647,psychology,5
+167647,quentin tarantino,2
+167647,quirky,4
+167647,realistic,1
+167647,revenge,3
+167647,romance,5
+167647,samuel l. jackson,2
+167647,satire,1
+167647,sci-fi,1
+167647,sexuality,3
+167647,social commentary,5
+167647,stylized,5
+167647,surreal,5
+167647,surrealism,5
+167647,tense,3
+167647,thought-provoking,5
+167647,thriller,1
+167647,twist ending,4
+167647,violence,2
+167647,visually appealing,4
+167647,whimsical,3
+167647,witty,1
+189485,absurd,1
+189485,action,2
+189485,adventure,1
+189485,al pacino,1
+189485,alternate reality,3
+189485,animation,2
+189485,artificial intelligence,3
+189485,atmospheric,1
+189485,based on a book,1
+189485,based on a true story,5
+189485,beautifully filmed,1
+189485,biography,3
+189485,bittersweet,2
+189485,black comedy,2
+189485,boring,1
+189485,british comedy,2
+189485,christopher nolan,3
+189485,cinematography,1
+189485,classic,4
+189485,clever,1
+189485,comedy,1
+189485,complicated,3
+189485,crime,5
+189485,cult film,3
+189485,cyberpunk,3
+189485,dark comedy,3
+189485,disney,1
+189485,disturbing,2
+189485,documentary,5
+189485,drama,2
+189485,dreams,1
+189485,drugs,5
+189485,dystopia,3
+189485,emotional,3
+189485,epic,1
+189485,family,3
+189485,fantasy,1
+189485,fantasy world,1
+189485,good dialogue,3
+189485,great acting,2
+189485,great cinematography,3
+189485,great ending,1
+189485,great soundtrack,1
+189485,heartwarming,3
+189485,hilarious,1
+189485,historical,1
+189485,humor,1
+189485,humorous,1
+189485,imdb top 250,1
+189485,inspirational,3
+189485,jim carrey,1
+189485,leonardo dicaprio,1
+189485,love story,1
+189485,mafia,1
+189485,magic,1
+189485,memory,3
+189485,mindfuck,3
+189485,multiple storylines,5
+189485,musical,1
+189485,mystery,3
+189485,new york city,3
+189485,nonlinear,5
+189485,organized crime,1
+189485,oscar (best picture),1
+189485,overrated,1
+189485,philosophical,3
+189485,philosophy,3
+189485,psychological,3
+189485,psychology,3
+189485,quentin tarantino,3
+189485,quirky,3
+189485,racism,3
+189485,reflective,1
+189485,robert de niro,1
+189485,romance,2
+189485,samuel l. jackson,3
+189485,scarlett johansson,1
+189485,sci-fi,2
+189485,slow,1
+189485,social commentary,5
+189485,space,1
+189485,stylized,5
+189485,surreal,1
+189485,thought-provoking,3
+189485,tom hanks,3
+189485,touching,3
+189485,true story,2
+189485,twist ending,2
+189485,violence,3
+189485,virtual reality,3
+189485,whimsical,1
+189485,witty,1

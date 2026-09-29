@@ -7,7 +7,9 @@ specified:
   * the rating distribution: min, max, mean and standard deviation;
   * the ten top tags under `score(user, tag)` from `part3_users.py`;
   * the ten favorite movies (highest-rated) and the ten least favorite (lowest-rated), each with
-    that movie's ten most-used tags.
+    that movie's ten most-used tags;
+  * every judged tag, score(user, tag) beside the judge's rating, with both ranks and their
+    difference (score rank minus judge rank), sorted by that difference, largest first.
 
 Tags are cleaned by the student's rule (case and surrounding whitespace ignored), and a movie's
 most-used tags are counted by applications. Ties in a user's ratings are broken by title, and
@@ -24,7 +26,7 @@ from pathlib import Path
 import numpy as np
 
 from load_data import load_all
-from part3_users import ME, add_me, clean_tag, read_my_ratings, score
+from part3_users import ME, add_me, clean_tag, read_my_ratings, score, side_by_side
 
 REPO = Path(__file__).resolve().parent
 SEED, OTHERS = 440, 9   # the student's rule: nine other users, drawn at random
@@ -50,6 +52,9 @@ def build(ratings, tags, movies):
     counts = counts.sort_values(["movieId", "n", "tag"], ascending=[True, False, True])
     top_tags = counts.groupby("movieId").head(TAGS).groupby("movieId")["tag"].apply(list)
     scored = score(ratings, tags, movies, users=users)
+    judged = None
+    if (REPO / "judge" / "ratings_users.csv").exists():
+        judged, _ = side_by_side(ratings, tags, movies)
 
     out = []
     for user in users:
@@ -65,6 +70,10 @@ def build(ratings, tags, movies):
             "score": [(r.tag, f"{r.score:.2f}", r.movies) for r in mine.head(TAGS).itertuples()],
             "best": [(r.title, r.rating, ", ".join(top_tags.get(r.movieId, []))) for r in best.itertuples()],
             "worst": [(r.title, r.rating, ", ".join(top_tags.get(r.movieId, []))) for r in worst.itertuples()],
+            "judged": None if judged is None else [
+                (r.tag, f"{r.score:.2f}", r.movies, r.judge, r.score_rank, r.judge_rank, r.difference)
+                for r in judged[judged["userId"] == user]
+                .sort_values(["difference", "tag"], ascending=[False, True]).itertuples()],
         })
     return out
 
@@ -93,6 +102,11 @@ def render(users):
             table_html(["Movie", "Rating", "Its %d most-used tags" % TAGS], u["best"]),
             "<h3>%d least favorite movies</h3>" % MOVIES,
             table_html(["Movie", "Rating", "Its %d most-used tags" % TAGS], u["worst"]),
+            "<h3>score(user, tag) beside the judge, sorted by difference</h3>",
+            "<p>not judged</p>" if u["judged"] is None else
+            table_html(["Tag", "score", "movies carrying it", "Judge", "score rank", "Judge rank",
+                        "score rank - Judge rank"],
+                       u["judged"]),
         ]
     return ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
             '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
@@ -109,6 +123,9 @@ def render_text(users):
         for name, rows in (("favorite", u["best"]), ("least favorite", u["worst"])):
             out.append("  %d %s movies" % (MOVIES, name))
             out += ["    %.1f  %s\n          %s" % (r, t, tg) for t, r, tg in rows]
+        out.append("  score(user, tag) beside the judge, sorted by difference")
+        out += ["    %+4d  %s  (score %s from %d movies, rank %d; judge %d, rank %d)" % (d, t, s, m, sr, j, jr)
+                for t, s, m, j, sr, jr, d in (u["judged"] or [])]
         out.append("")
     return "\n".join(out)
 
