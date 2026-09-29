@@ -221,7 +221,7 @@ Give these to Claude the way you gave it the rest. Graded on the catch and the c
 making Claude look good or bad.
 
 **A moment where Claude was wrong or overconfident, how you caught it, and where it
-happened. Name the part and the step, so the moment can be found:** XXXX
+happened. Name the part and the step, so the moment can be found:** Improvement 2 in Part 3: I sent Claude my answer, it said it re-ran the count and got 6 instead of 7. However, after that, it said "I need to correct an error" and 7 was correct.
 
 **One call where you overrode Claude, and why:** XXXX
 
