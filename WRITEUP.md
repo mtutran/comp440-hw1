@@ -197,15 +197,15 @@ My user viewer shows their rating stats, top 10 tags by score, 10 favorite and 1
 
 **What I put in the description column for a person, and why (about 150 words):**
 
-XXXX
+The description column for a person listed their top 10 favorite and top 10 least favorite movies, along with the person's rating and each movie's 10 most-used tags. I include these information because it shows the person's taste (tags) and how strongly the person prefer that (ratings).
 
 **My criterion for people: what it asks the judge to do that the movie criterion did not (about 60 words):**
 
-XXXX
+The movie criterion asks the judge to look inside one movie and rate how specific a tag is to that story, marking generic tags down. The people criterion asks it to compare across the person's favorite movies and their least favorite movies so that a tag recur across the person's favorites and appear less or not at all in their least favorites would rank higher.
 
 **The user-tag pairs I chose to judge, how many, and why those (about 100 words):**
 
-XXXX
+I asked for 777 user-tag pairs, from part3_users.py section (3), for 10 people (me and 9 picked at random so the group covers different tastes and numbers of ratings). The pairs are every tag from judge/vocabulary.txt that appears in a person's description. I used only tags that appear in the description and not pairs by their score, so the comparison would not be biased.
 
 **Improvement 1: what I changed in the scoring function, what the judge and the viewer showed before and after (about 150 words):**
 
